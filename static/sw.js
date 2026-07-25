@@ -1,10 +1,12 @@
-const CACHE_NAME = 'pickea-v1';
+const CACHE_NAME = 'pickea-v2';
 const PRECACHE = [
 	'/',
 	'/manifest.json',
 	'/images/pickea-isotipo.png',
 	'/images/pickea.jpg',
 	'/fonts/SF-Pro-Rounded-Regular.otf',
+	'https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css',
+	'https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.woff2',
 ];
 
 self.addEventListener('install', (event) => {
@@ -27,30 +29,22 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
 	if (event.request.method !== 'GET') return;
-	if (event.request.url.includes('simpleicons.org') || event.request.url.includes('cdn.jsdelivr.net') || event.request.url.includes('fonts.googleapis.com') || event.request.url.includes('fonts.gstatic.com')) {
-		event.respondWith(
-			caches.match(event.request).then((cached) => {
-				return cached || fetch(event.request).then((response) => {
-					if (response.ok) {
-						const clone = response.clone();
-						caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-					}
-					return response;
-				});
-			})
-		);
-		return;
-	}
 
 	event.respondWith(
-		fetch(event.request)
-			.then((response) => {
-				if (response.ok) {
+		caches.match(event.request).then((cached) => {
+			if (cached) return cached;
+
+			return fetch(event.request).then((response) => {
+				if (response.ok && (event.request.url.startsWith('http'))) {
 					const clone = response.clone();
 					caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
 				}
 				return response;
-			})
-			.catch(() => caches.match(event.request))
+			}).catch(() => {
+				if (event.request.destination === 'document') {
+					return caches.match('/');
+				}
+			});
+		})
 	);
 });
