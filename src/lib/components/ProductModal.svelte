@@ -137,7 +137,7 @@
 						Comprar
 					</button>
 					<button
-						onclick={() => { cart.addItem(product.id, selectedVariant?.id); onclose(); }}
+						onclick={() => { cart.addItem(product.id, selectedVariant?.id); }}
 						class="flex-1 px-5 py-3 border border-hairline text-body rounded-btn text-sm sm:text-base font-medium transition-all duration-200 hover:bg-bone cursor-pointer flex items-center justify-center gap-2"
 					>
 						<i class="ri-add-line"></i>
