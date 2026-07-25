@@ -2,7 +2,6 @@
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import WhatsAppFloat from '$lib/components/WhatsAppFloat.svelte';
 	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
 	import SplashScreen from '$lib/components/SplashScreen.svelte';
 	import OfflineBanner from '$lib/components/OfflineBanner.svelte';
@@ -29,7 +28,6 @@
 {/if}
 
 <Navbar />
-<WhatsAppFloat />
 <ScrollToTop />
 <OfflineBanner />
 <main class="min-h-[calc(100vh-4rem)]">
