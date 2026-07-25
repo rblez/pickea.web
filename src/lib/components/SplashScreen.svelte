@@ -29,7 +29,7 @@
 	/>
 	<div class="w-40 h-1.5 bg-white/10 rounded-full overflow-hidden">
 		<div
-			class="h-full bg-ember rounded-full"
+			class="h-full bg-white rounded-full"
 			style="width: {progress}%"
 		></div>
 	</div>
