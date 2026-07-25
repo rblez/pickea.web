@@ -3,7 +3,7 @@
 		"id": 1,
 		"name": "Netflix Premium 1 mes",
 		"description": "Acceso Premium a Netflix por 1 mes. 4 pantallas simultáneas, calidad 4K UHD.",
-		"image": "streaming.svg",
+		"image": "",
 		"priceUSD": 2500,
 		"currencies": ["CUP"],
 		"category": "streaming"
