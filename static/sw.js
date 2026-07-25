@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pickea-v3';
+const CACHE_NAME = 'pickea-v4';
 const PRECACHE = [
 	'/',
 	'/manifest.json',
