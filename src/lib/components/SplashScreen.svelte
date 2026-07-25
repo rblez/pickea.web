@@ -2,23 +2,20 @@
 	let { ondone }: { ondone: () => void } = $props();
 
 	const duration = Math.floor(Math.random() * 4000) + 4000;
-	let phase = $state<'pulse' | 'exit'>('pulse');
 	let progress = $state(0);
 
 	$effect(() => {
-		const exitTime = duration - 1000;
-		const t1 = setTimeout(() => phase = 'exit', exitTime);
-		const t2 = setTimeout(ondone, duration);
+		const t = setTimeout(ondone, duration);
+		const start = performance.now();
 
-		const start = Date.now();
-		const tick = () => {
-			const elapsed = Date.now() - start;
+		function tick(now: number) {
+			const elapsed = now - start;
 			progress = Math.min((elapsed / duration) * 100, 100);
 			if (elapsed < duration) requestAnimationFrame(tick);
-		};
-		requestAnimationFrame(tick);
+		}
 
-		return () => { clearTimeout(t1); clearTimeout(t2); };
+		requestAnimationFrame(tick);
+		return () => clearTimeout(t);
 	});
 </script>
 
@@ -26,14 +23,12 @@
 	<img
 		src={'/images/pickea-isotipo.png'}
 		alt="Pickea"
-		class="h-20 w-auto transition-all duration-700 ease-in-out
-			{phase === 'pulse' ? 'animate-pulse-icon opacity-100' : 'opacity-0 translate-y-8 scale-90'}"
+		class="h-20 w-auto animate-pulse-icon"
 	/>
-	<div class="w-40 transition-all duration-500 ease-in-out
-		{phase === 'pulse' ? 'opacity-100' : 'opacity-0 scale-x-75'}">
-		<div class="h-1 bg-hairline rounded-full overflow-hidden">
+	<div class="w-40">
+		<div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
 			<div
-				class="h-full bg-ember rounded-full transition-all duration-100 ease-linear"
+				class="h-full bg-ember rounded-full"
 				style="width: {progress}%"
 			></div>
 		</div>
