@@ -6,12 +6,14 @@
 
 	$effect(() => {
 		const t = setTimeout(ondone, duration);
-		const start = performance.now();
+		const start = Date.now();
 
-		function tick(now: number) {
-			const elapsed = now - start;
+		function tick() {
+			const elapsed = Date.now() - start;
 			progress = Math.min((elapsed / duration) * 100, 100);
-			if (elapsed < duration) requestAnimationFrame(tick);
+			if (elapsed < duration) {
+				requestAnimationFrame(tick);
+			}
 		}
 
 		requestAnimationFrame(tick);
@@ -25,13 +27,11 @@
 		alt="Pickea"
 		class="h-20 w-auto animate-pulse-icon"
 	/>
-	<div class="w-40">
-		<div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
-			<div
-				class="h-full bg-ember rounded-full"
-				style="width: {progress}%"
-			></div>
-		</div>
+	<div class="w-40 h-1.5 bg-white/10 rounded-full overflow-hidden">
+		<div
+			class="h-full bg-ember rounded-full"
+			style="width: {progress}%"
+		></div>
 	</div>
 </div>
 
