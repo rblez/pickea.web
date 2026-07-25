@@ -1,0 +1,27 @@
+{
+	"name": "Pickea — Servicios digitales para Cuba",
+	"short_name": "Pickea",
+	"description": "Recargas, streaming, suscripciones, licencias y más. Compra y paga servicios digitales desde Cuba.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#080808",
+	"theme_color": "#080808",
+	"orientation": "portrait-primary",
+	"icons": [
+		{
+			"src": "/images/pickea-isotipo.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "/images/pickea-isotipo.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"categories": ["shopping", "utilities"],
+	"lang": "es",
+	"dir": "ltr"
+}

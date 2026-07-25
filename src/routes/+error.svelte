@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 
 	let status = $derived($page.status);
@@ -14,7 +13,7 @@
 
 <div class="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center">
 	<img
-		src={base + '/images/pickea-isotipo.png'}
+		src={'/images/pickea-isotipo.png'}
 		alt="Pickea"
 		class="h-16 w-auto mb-8 opacity-30"
 	/>
@@ -37,13 +36,13 @@
 
 	<div class="mt-8 flex gap-4">
 		<a
-			href={base + '/'}
+			href={'/'}
 			class="inline-flex items-center gap-2 bg-ember text-white px-6 py-3 rounded-btn text-sm font-medium transition-all duration-200 hover:bg-ember-active no-underline"
 		>
 			Ir al inicio
 		</a>
 		<a
-			href={base + '/'}
+			href={'/'}
 			class="inline-flex items-center gap-2 border border-hairline text-ink px-6 py-3 rounded-btn text-sm font-medium transition-all duration-200 hover:bg-bone no-underline"
 		>
 			Ver productos

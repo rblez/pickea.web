@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { cart } from '$lib/stores/cart.svelte';
 	import { formatPrice } from '$lib/data/currencies';
 	import products from '$lib/data/products';
@@ -33,8 +32,8 @@
 		<div class="text-center py-16 bg-card border border-hairline rounded-card">
 			<p class="text-lg text-muted mb-6">Tu carrito está vacío</p>
 			<a
-				href={base + '/'}
-				class="inline-flex items-center gap-2 bg-ember text-white px-6 py-3 rounded-btn text-sm font-medium transition-all duration-200 hover:bg-ember-active no-underline"
+				href={'/'}
+				class="inline-flex bg-ember text-white px-6 py-3 rounded-btn text-sm font-medium transition-all duration-200 hover:bg-ember-active no-underline"
 			>
 				Ver servicios
 			</a>
@@ -44,7 +43,7 @@
 			{#each cartProducts as cp}
 				<div class="flex items-center gap-4 bg-card border border-hairline rounded-card p-4">
 					<img
-						src={base + '/images/' + cp.product.image}
+						src={'/images/' + cp.product.image}
 						alt={cp.product.name}
 						class="w-20 h-20 object-cover rounded-lg bg-bone flex-shrink-0"
 					/>
@@ -83,7 +82,7 @@
 			</div>
 
 			<a
-				href={base + '/checkout'}
+				href={'/checkout'}
 				class="mt-6 w-full flex items-center justify-center gap-2 bg-ember text-white px-6 py-3 rounded-btn text-base font-medium transition-all duration-200 hover:bg-ember-active active:scale-[0.98] no-underline"
 			>
 				Proceder al pago

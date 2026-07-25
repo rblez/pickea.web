@@ -5,7 +5,7 @@
 
 	$effect(() => {
 		if (browser) {
-			goto(base + '/', { replaceState: true });
+			goto('/', { replaceState: true });
 		}
 	});
 </script>

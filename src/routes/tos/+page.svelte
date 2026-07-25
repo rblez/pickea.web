@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 </script>
 
 <svelte:head>
@@ -97,7 +96,7 @@
 
 	<div class="mt-8 text-center">
 		<a
-			href={base + '/checkout'}
+			href={'/checkout'}
 			class="inline-flex items-center gap-2 text-ember font-medium text-sm hover:text-ember-active transition-colors no-underline"
 		>
 			<i class="ri-arrow-left-line"></i>

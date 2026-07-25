@@ -2,22 +2,21 @@
 	import type { Product } from '$lib/types';
 	import { formatPrice } from '$lib/data/currencies';
 	import { cart } from '$lib/stores/cart.svelte';
-	import { base } from '$app/paths';
 	import { goto } from '$app/navigation';
 
 	let { product, onclose }: { product: Product; onclose: () => void } = $props();
 
-	let imgSrc = $derived(base + '/images/' + product.image);
+	let imgSrc = $derived('/images/' + product.image);
 	let showShare = $state(false);
 
 	function buyNow() {
 		cart.clear();
 		cart.addItem(product.id);
 		onclose();
-		goto(base + '/checkout');
+		goto('/checkout');
 	}
 
-	const shareUrl = $derived(`https://pickea.shop${base}/`);
+	const shareUrl = $derived('https://pickea.rblez.com');
 	const shareText = $derived(`Mira este servicio: ${product.name} — ${formatPrice(product.priceUSD, 'CUP')}`);
 
 	function shareWhatsApp() {

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-
 	let { ondone }: { ondone: () => void } = $props();
 
 	const duration = Math.floor(Math.random() * 4000) + 4000;
@@ -13,7 +11,7 @@
 
 <div class="fixed inset-0 z-[100] bg-black flex items-center justify-center">
 	<img
-		src={base + '/images/pickea-isotipo.png'}
+		src={'/images/pickea-isotipo.png'}
 		alt="Pickea"
 		class="h-20 w-auto animate-pulse-icon"
 	/>

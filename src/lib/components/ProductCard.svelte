@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Product } from '$lib/types';
 	import { formatPrice } from '$lib/data/currencies';
-	import { base } from '$app/paths';
 	import ProductModal from './ProductModal.svelte';
 
 	let { product }: { product: Product } = $props();
@@ -26,7 +25,7 @@
 >
 	<div class="aspect-[4/3] bg-bone overflow-hidden">
 		<img
-			src={base + '/images/' + product.image}
+			src={'/images/' + product.image}
 			alt={product.name}
 			class="w-full h-full object-cover"
 			loading="lazy"

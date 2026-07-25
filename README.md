@@ -1,42 +1,71 @@
-# sv
+# Pickea
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Servicios digitales para Cuba. Recargas, streaming, suscripciones, licencias y más.
 
-## Creating a project
+## Stack
 
-If you're seeing this, you've probably already done this step. Congrats!
+- SvelteKit v2 + Svelte 5 (runes)
+- Tailwind CSS v4
+- TypeScript, Vite 8
+- Static adapter (`@sveltejs/adapter-static`)
+- PWA con Service Worker + manifest
 
-```sh
-# create a new project
-npx sv create my-app
+## Desarrollo
+
+```bash
+bun install
+bun run dev
 ```
 
-To recreate this project with the same configuration:
+## Build
 
-```sh
-# recreate this project
-npx sv@0.16.3 create --template minimal --types ts --install npm store
+```bash
+bun run build
 ```
 
-## Developing
+## Deploy en Vercel
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. Conectar repo `rblez/pickea.web`
+2. Framework: SvelteKit
+3. Build command: `bun run build`
+4. Output directory: `build`
+5. Dominio: `pickea.rblez.com`
 
-```sh
-npm run dev
+## Estructura
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```
+src/
+├── lib/
+│   ├── components/    # UI components
+│   ├── data/          # Productos, categorías, monedas
+│   ├── stores/        # Carrito (localStorage)
+│   └── types.ts
+├── routes/
+│   ├── +page.svelte        # Home (catálogo + hero)
+│   ├── cart/               # Carrito
+│   ├── checkout/           # Checkout → WhatsApp
+│   ├── tos/                # Términos y condiciones
+│   └── products/           # Redirect a /
+static/
+├── images/
+├── fonts/
+├── manifest.json     # PWA manifest
+└── sw.js             # Service Worker
 ```
 
-## Building
+## Funcionalidades
 
-To create a production version of your app:
+- Catálogo con búsqueda y filtros por categoría
+- Modal de producto (Comprar / Añadir al carrito / Compartir)
+- Carrito persistente (localStorage)
+- Checkout → envío de pedido por WhatsApp (+53 63807214)
+- Splash screen con animación
+- Detección de conexión offline
+- Scroll-to-top
+- PWA instalable
+- Dark theme
+- Responsive (móvil 2 cols, desktop 4 cols)
 
-```sh
-npm run build
-```
+## Contacto
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+WhatsApp: [+53 63807214](https://wa.me/5363807214)

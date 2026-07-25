@@ -1,8 +1,6 @@
 {
-	"buildCommand": "vite build",
+	"buildCommand": "bun run build",
 	"outputDirectory": "build",
-	"basePath": "/v1",
-	"redirects": [
-		{ "source": "/", "destination": "/v1", "permanent": false }
-	]
+	"installCommand": "bun install",
+	"framework": "sveltekit"
 }

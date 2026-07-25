@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { categories } from '$lib/data/categories';
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import SkeletonCard from '$lib/components/SkeletonCard.svelte';
@@ -47,7 +46,7 @@
 <!-- Hero -->
 <section class="relative overflow-hidden border-b border-hairline bg-canvas">
 	<div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
-		<img src={base + '/images/pickea-isotipo.png'} alt="" class="h-14 w-auto mx-auto mb-6 opacity-80" />
+		<img src={'/images/pickea-isotipo.png'} alt="" class="h-14 w-auto mx-auto mb-6 opacity-80" />
 		<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-ink leading-tight">
 			Servicios digitales<br />
 			<span class="text-ember">para Cuba</span>

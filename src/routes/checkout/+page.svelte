@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { base } from '$app/paths';
 	import { cart } from '$lib/stores/cart.svelte';
 	import products from '$lib/data/products';
 	import { formatPrice } from '$lib/data/currencies';
@@ -79,7 +78,7 @@
 			<h2 class="text-2xl font-bold text-ink mb-2">¡Pedido enviado!</h2>
 			<p class="text-body mb-6">Te hemos redirigido a WhatsApp para completar la compra.</p>
 			<a
-				href={base + '/'}
+				href={'/'}
 				class="inline-flex bg-ember text-white px-6 py-3 rounded-btn text-sm font-medium transition-all duration-200 hover:bg-ember-active no-underline"
 			>
 				Seguir comprando
@@ -89,7 +88,7 @@
 		<div class="text-center py-16 bg-card border border-hairline rounded-card">
 			<p class="text-lg text-muted mb-6">Tu carrito está vacío</p>
 			<a
-				href={base + '/'}
+				href={'/'}
 				class="inline-flex bg-ember text-white px-6 py-3 rounded-btn text-sm font-medium transition-all no-underline"
 			>
 				Ver servicios
@@ -161,7 +160,7 @@
 					/>
 					<label for="tos" class="text-sm text-body cursor-pointer">
 						He leído y acepto los
-						<a href={base + '/tos'} target="_blank" class="text-ember hover:text-ember-active underline">Términos y Condiciones</a>
+						<a href={'/tos'} target="_blank" class="text-ember hover:text-ember-active underline">Términos y Condiciones</a>
 					</label>
 				</div>
 
