@@ -31,10 +31,10 @@
 		animation: pulse-icon 2s ease-in-out infinite;
 	}
 	@keyframes dot-bounce {
-		0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
-		40% { opacity: 1; transform: scale(1.2); }
+		0%, 80%, 100% { opacity: 0.4; transform: scale(0.85); }
+		40% { opacity: 1; transform: scale(1.15); }
 	}
-	.animate-dot-1 { animation: dot-bounce 1.4s ease-in-out infinite; }
-	.animate-dot-2 { animation: dot-bounce 1.4s ease-in-out 0.2s infinite; }
-	.animate-dot-3 { animation: dot-bounce 1.4s ease-in-out 0.4s infinite; }
+	.animate-dot-1 { animation: dot-bounce 1.2s ease-in-out infinite; }
+	.animate-dot-2 { animation: dot-bounce 1.2s ease-in-out 0.15s infinite; }
+	.animate-dot-3 { animation: dot-bounce 1.2s ease-in-out 0.3s infinite; }
 </style>
