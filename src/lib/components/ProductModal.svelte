@@ -10,6 +10,9 @@
 	let imgSrc = $derived('/images/' + product.image);
 	let showShare = $state(false);
 	let imgError = $state(false);
+	let selectedVariant = $state(product.variants?.[0] ?? null);
+
+	let currentPrice = $derived(selectedVariant ? selectedVariant.price : product.priceUSD);
 
 	$effect(() => {
 		setModalOpen(true);
@@ -21,14 +24,13 @@
 	});
 
 	function buyNow() {
-		cart.clear();
-		cart.addItem(product.id);
+		cart.addItem(product.id, selectedVariant?.id);
 		onclose();
 		goto('/checkout');
 	}
 
-	const shareUrl = $derived('https://pickea.rblez.com');
-	const shareText = $derived(`Mira este servicio: ${product.name} — ${formatPrice(product.priceUSD, 'CUP')}`);
+	const shareUrl = $derived(`https://pickea.rblez.com/p/${product.id}?utm_source=share&utm_medium=social&utm_campaign=product`);
+	const shareText = $derived(`Mira este servicio: ${product.name}${selectedVariant ? ' — ' + selectedVariant.label : ''} — ${formatPrice(currentPrice, 'CUP')}`);
 
 	function shareWhatsApp() {
 		window.open(`https://wa.me/?text=${encodeURIComponent(shareText + '\n' + shareUrl)}`, '_blank');
@@ -59,7 +61,7 @@
 <!-- backdrop -->
 <button
 	onclick={onclose}
-	class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm cursor-default"
+	class="fixed inset-0 z-40 bg-black/60 cursor-default pointer-events-auto"
 	aria-label="Cerrar"
 ></button>
 
@@ -93,7 +95,7 @@
 			</button>
 		</div>
 
-		<div class="flex-1 min-h-0 flex flex-col p-5 sm:p-6 gap-4 sm:gap-5">
+		<div class="flex-1 min-h-0 flex flex-col justify-center p-5 sm:p-6 gap-4 sm:gap-5 overflow-y-auto">
 			<div>
 				<h2 class="text-xl sm:text-2xl font-bold text-ink">{product.name}</h2>
 				<p class="text-sm text-muted mt-1">{product.category}</p>
@@ -101,9 +103,29 @@
 
 			<p class="text-sm sm:text-base text-body leading-relaxed">{product.description}</p>
 
+			<!-- Variant selector -->
+			{#if product.variants && product.variants.length > 0}
+				<div>
+					<p class="text-xs sm:text-sm text-muted mb-2">Elige una opción:</p>
+					<div class="flex flex-wrap gap-2">
+						{#each product.variants as variant}
+							<button
+								onclick={() => selectedVariant = variant}
+								class="px-4 py-2 text-sm font-medium rounded-full border transition-all duration-200 cursor-pointer
+									{selectedVariant?.id === variant.id
+										? 'bg-ember text-white border-ember shadow-lg shadow-ember/20'
+										: 'bg-card text-body border-hairline hover:border-ember/50 hover:text-ember'}"
+							>
+								{variant.label}
+							</button>
+						{/each}
+					</div>
+				</div>
+			{/if}
+
 			<div class="bg-bone rounded-btn p-3 sm:p-4">
 				<p class="text-xs sm:text-sm text-muted mb-0.5">Precio</p>
-				<p class="text-xl sm:text-2xl font-bold text-ember">{formatPrice(product.priceUSD, 'CUP')}</p>
+				<p class="text-xl sm:text-2xl font-bold text-ember">{formatPrice(currentPrice, 'CUP')}</p>
 			</div>
 
 			<div class="mt-auto space-y-3">
@@ -115,7 +137,7 @@
 						Comprar
 					</button>
 					<button
-						onclick={() => { cart.addItem(product.id); onclose(); }}
+						onclick={() => { cart.addItem(product.id, selectedVariant?.id); onclose(); }}
 						class="flex-1 px-5 py-3 border border-hairline text-body rounded-btn text-sm sm:text-base font-medium transition-all duration-200 hover:bg-bone cursor-pointer flex items-center justify-center gap-2"
 					>
 						<i class="ri-add-line"></i>

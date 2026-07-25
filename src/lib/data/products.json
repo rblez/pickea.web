@@ -1,11 +1,124 @@
 [
 	{
-		"id": 1,
-		"name": "Netflix Premium 1 mes",
-		"description": "Acceso Premium a Netflix por 1 mes. 4 pantallas simultáneas, calidad 4K UHD.",
-		"image": "",
-		"priceUSD": 2500,
+		"id": "nF7kQ2xP",
+		"name": "Netflix",
+		"description": "Estrenos todos los viernes. Series que no te puedes perder, películas premiadas y documentales que te van a volar la cabeza. Todo en tu pantalla, sin anuncios, cuando tú quieras.",
+		"image": "netflix.webp",
+		"priceUSD": 3000,
 		"currencies": ["CUP"],
-		"category": "streaming"
+		"category": "streaming",
+		"variants": [
+			{ "id": "nf-1m", "label": "1 mes", "price": 3000 }
+		]
+	},
+	{
+		"id": "mG5tV3rK",
+		"name": "Magis TV",
+		"description": "5,000+ títulos alucinantes. Doramas que enamoran, animes que epantan, películas de estreno y series que no paras de mirar. Un catálogo infinito en tu dispositivo.",
+		"image": "magistv.webp",
+		"priceUSD": 5000,
+		"currencies": ["CUP"],
+		"category": "streaming",
+		"variants": [
+			{ "id": "mt-1m", "label": "1 mes", "price": 5000 }
+		]
+	},
+	{
+		"id": "pPy7Lw9R",
+		"name": "PayPal Argentina",
+		"description": "Cuenta verificada de PayPal con todos tus datos. Paga en ARS, USD, MXN, DOP, COP, CAD y más. Requiere VPN de EE.UU. o Argentina para usar.",
+		"image": "paypal.webp",
+		"priceUSD": 4000,
+		"currencies": ["CUP"],
+		"category": "servicios"
+	},
+	{
+		"id": "eVpN8kT4",
+		"name": "ExpressVPN",
+		"description": "Navega libre sin límites. Accede a contenido de todo el mundo con la VPN más rápida y segura. Protección total en todos tus dispositivos.",
+		"image": "expressvpn.webp",
+		"priceUSD": 4000,
+		"currencies": ["CUP"],
+		"category": "suscripciones",
+		"variants": [
+			{ "id": "ev-1a", "label": "1 año", "price": 4000 }
+		]
+	},
+	{
+		"id": "cNvPr0A1",
+		"name": "Canva Pro",
+		"description": "Diseña como profesional. Templates premium, fotos de stock, logos, videos y herramientas de IA. Creatividad sin límites.",
+		"image": "canva.webp",
+		"priceUSD": 3000,
+		"currencies": ["CUP"],
+		"category": "suscripciones",
+		"variants": [
+			{ "id": "cp-1a", "label": "1 año", "price": 3000 }
+		]
+	},
+	{
+		"id": "vPn3nZ0na",
+		"name": "VPN con IP de Cuba",
+		"description": "Conéctate con IP cubana desde cualquier parte del mundo. Ideal para usar Enzona en el exterior.",
+		"image": "wireguard-vpn.webp",
+		"priceUSD": 3000,
+		"currencies": ["CUP"],
+		"category": "suscripciones",
+		"variants": [
+			{ "id": "vc-1m", "label": "1 mes", "price": 3000 }
+		]
+	},
+	{
+		"id": "sRfSh4rk",
+		"name": "Surfshark VPN",
+		"description": "Navega sin huella. VPN rápida, segura y sin límite de dispositivos. Accede a contenido de todo el mundo desde donde estés.",
+		"image": "surfsharkvpn.webp",
+		"priceUSD": 1200,
+		"currencies": ["CUP"],
+		"category": "suscripciones",
+		"variants": [
+			{ "id": "ss-1m", "label": "1 mes", "price": 1200 }
+		]
+	},
+	{
+		"id": "eT3cs4x6",
+		"name": "Recarga ETECSA x6",
+		"description": "Del 27 al 31 de julio. Recarga internacional entre 600 y 1,250 CUP y multiplica tu saldo x6. Además ganas datos ilimitados de 12 a.m. a 7 a.m. por 30 días.",
+		"image": "cubacel.webp",
+		"priceUSD": 25000,
+		"currencies": ["CUP"],
+		"category": "recargas",
+		"variants": [
+			{ "id": "et-600", "label": "Recarga 600 CUP", "price": 25000 }
+		]
+	},
+	{
+		"id": "w1nD0ws",
+		"name": "Activación Windows 10/11",
+		"description": "Activa tu Windows 10 o 11 de forma permanente. Compatible con todas las ediciones. Soporte incluido.",
+		"image": "win11-10.webp",
+		"priceUSD": 6000,
+		"currencies": ["CUP"],
+		"category": "licencias"
+	},
+	{
+		"id": "fr33f1r3",
+		"name": "Free Fire",
+		"description": "Diamantes, pases y membresías para Free Fire. Recarga directa por ID. Entrega inmediata.",
+		"image": "ff.webp",
+		"priceUSD": 910,
+		"currencies": ["CUP"],
+		"category": "juegos",
+		"variants": [
+			{ "id": "ff-110", "label": "110", "price": 910 },
+			{ "id": "ff-220", "label": "220", "price": 1820 },
+			{ "id": "ff-341", "label": "341", "price": 2730 },
+			{ "id": "ff-572", "label": "572", "price": 4550 },
+			{ "id": "ff-1160", "label": "1,160", "price": 9100 },
+			{ "id": "ff-2398", "label": "2,398", "price": 18200 },
+			{ "id": "ff-booyah", "label": "Pass Booyah", "price": 4000 },
+			{ "id": "ff-semanal", "label": "M. Semanal", "price": 1820 },
+			{ "id": "ff-mensual", "label": "M. Mensual", "price": 10100 }
+		]
 	}
 ]

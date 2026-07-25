@@ -2,6 +2,8 @@
 	import { cart } from '$lib/stores/cart.svelte';
 	import products from '$lib/data/products';
 	import { formatPrice } from '$lib/data/currencies';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	let name = $state('');
 	let lastName = $state('');
@@ -10,40 +12,73 @@
 	let submitted = $state(false);
 	let sending = $state(false);
 
-	let cartProducts = $derived(
-		cart.items
-			.map((ci) => {
-				const product = products.find((p) => p.id === ci.productId);
-				return product ? { ...ci, product } : null;
-			})
-			.filter((x): x is NonNullable<typeof x> => x !== null)
-	);
+	let directProduct = $derived.by(() => {
+		const id = $page.url.searchParams.get('product');
+		if (!id) return null;
+		return products.find((p) => p.id === id) ?? null;
+	});
+
+	function resolveItem(ci: { productId: string; variantId?: string; quantity: number }) {
+		const product = products.find((p) => p.id === ci.productId);
+		if (!product) return null;
+		const variant = ci.variantId ? product.variants?.find((v) => v.id === ci.variantId) : null;
+		const price = variant ? variant.price : product.priceUSD;
+		const label = variant ? variant.label : null;
+		return { ...ci, product, variant, price, label };
+	}
+
+	let cartProducts = $derived.by(() => {
+		if (directProduct) {
+			const variant = directProduct.variants?.[0] ?? null;
+			return [{
+				productId: directProduct.id,
+				variantId: variant?.id,
+				quantity: 1,
+				product: directProduct,
+				variant,
+				price: variant ? variant.price : directProduct.priceUSD,
+				label: variant?.label ?? null,
+			}];
+		}
+		return cart.items.map(resolveItem).filter((x): x is NonNullable<typeof x> => x !== null);
+	});
 
 	let totalCUP = $derived(
-		cartProducts.reduce((sum, cp) => sum + cp.product.priceUSD * cp.quantity, 0)
+		cartProducts.reduce((sum, cp) => sum + cp.price * cp.quantity, 0)
 	);
 
 	let totalFormatted = $derived(formatPrice(totalCUP, 'CUP'));
 
-	let cartEmpty = $derived(cart.items.length === 0);
+	let cartEmpty = $derived(cart.items.length === 0 && !directProduct);
+
+	$effect(() => {
+		if (cartEmpty) {
+			goto('/');
+		}
+	});
 
 	function buildWhatsAppMessage(): string {
-		const lines: string[] = ['*Nuevo Pedido — Pickea*', ''];
 		let fullName = name;
 		if (lastName) fullName += ` ${lastName}`;
-		lines.push(`*Nombre:* ${fullName}`);
-		lines.push(`*WhatsApp:* ${phone}`);
-		lines.push(`*Total:* ${totalFormatted}`);
-		lines.push('');
-		lines.push('*Servicios:*');
 
-		for (const cp of cartProducts) {
-			const sub = formatPrice(cp.product.priceUSD * cp.quantity, 'CUP');
-			lines.push(`- ${cp.product.name} x${cp.quantity} = ${sub}`);
-		}
+		const items = cartProducts.map((cp) => {
+			const qty = cp.quantity > 1 ? ` x${cp.quantity}` : '';
+			const variant = cp.label ? ` (${cp.label})` : '';
+			return `▸ ${cp.product.name}${variant}${qty} — ${formatPrice(cp.price * cp.quantity, 'CUP')}`;
+		});
 
-		lines.push('');
-		lines.push('Gracias, espero su confirmación.');
+		const lines = [
+			`Hola Pickea 👋`,
+			``,
+			`Me interesa este servicio:`,
+			...items,
+			``,
+			`📍 Total: *${totalFormatted}*`,
+			`👤 ${fullName}`,
+			`📱 ${phone}`,
+			``,
+			`¿Está disponible?`,
+		];
 
 		return encodeURIComponent(lines.join('\n'));
 	}
@@ -58,13 +93,13 @@
 		setTimeout(() => {
 			submitted = true;
 			cart.clear();
-			window.open(`https://wa.me/5363807214?text=${msg}`, '_blank');
+			window.open(`https://wa.me/5363807214?text=${msg}&utm_source=checkout&utm_medium=whatsapp&utm_campaign=order`, '_blank');
 		}, 1200);
 	}
 </script>
 
 <svelte:head>
-	<title>Checkout — Pickea</title>
+	<title>Pickea | Checkout</title>
 </svelte:head>
 
 <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-section">
@@ -101,8 +136,14 @@
 				<h2 class="text-lg font-semibold text-ink">Tu pedido</h2>
 				{#each cartProducts as cp}
 					<div class="flex items-center justify-between text-sm">
-						<span class="text-body">{cp.product.name} x{cp.quantity}</span>
-						<span class="font-medium text-ink">{formatPrice(cp.product.priceUSD * cp.quantity, 'CUP')}</span>
+						<div class="text-body">
+							<span>{cp.product.name}</span>
+							{#if cp.label}
+								<span class="text-ember"> — {cp.label}</span>
+							{/if}
+							<span class="text-muted"> x{cp.quantity}</span>
+						</div>
+						<span class="font-medium text-ink">{formatPrice(cp.price * cp.quantity, 'CUP')}</span>
 					</div>
 				{/each}
 				<div class="pt-3 border-t border-hairline flex items-center justify-between">
@@ -160,7 +201,7 @@
 					/>
 					<label for="tos" class="text-sm text-body cursor-pointer">
 						He leído y acepto los
-						<a href={'/tos'} target="_blank" class="text-ember hover:text-ember-active underline">Términos y Condiciones</a>
+						<a href={'/tos'} target="_blank" class="text-ember hover:text-ember-active underline">Términos de Servicio</a>
 					</label>
 				</div>
 

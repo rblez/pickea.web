@@ -38,7 +38,13 @@
 		<h3 class="text-sm sm:text-lg font-semibold text-ink leading-tight">{product.name}</h3>
 		<p class="text-xs sm:text-sm text-body leading-relaxed line-clamp-2">{product.description}</p>
 
-		<p class="text-base sm:text-xl font-bold text-ember">{formatPrice(product.priceUSD, 'CUP')}</p>
+		<p class="text-base sm:text-xl font-bold text-ember">
+			{#if product.variants && product.variants.length > 0}
+				Desde {formatPrice(Math.min(...product.variants.map(v => v.price)), 'CUP')}
+			{:else}
+				{formatPrice(product.priceUSD, 'CUP')}
+			{/if}
+		</p>
 
 		<button
 			onclick={(e) => { e.stopPropagation(); goto('/p/' + product.id); }}

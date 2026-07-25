@@ -2,24 +2,24 @@
 </script>
 
 <svelte:head>
-	<title>Términos y Condiciones — Pickea</title>
+	<title>Pickea | Términos de Servicio</title>
 </svelte:head>
 
 <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-section">
-	<h1 class="text-3xl sm:text-4xl font-bold text-ink mb-10">Términos y Condiciones</h1>
+	<h1 class="text-3xl sm:text-4xl font-bold text-ink mb-10">Términos de Servicio</h1>
 
 	<div class="bg-card border border-hairline rounded-card p-6 sm:p-8 space-y-6 text-body leading-relaxed">
 		<div>
 			<h2 class="text-xl font-semibold text-ink mb-3">1. Información general</h2>
 			<p>
-				Pickea es una plataforma de catálogo de servicios digitales operada por Pickea, con sede en Santiago de Cuba. Estos Términos y Condiciones regulan el uso de la plataforma y la compra de servicios digitales ofrecidos a través de ella.
+				Pickea es una plataforma de catálogo de servicios digitales operada por Pickea, con sede en Santiago de Cuba. Estos Términos de Servicio regulan el uso de la plataforma y la compra de servicios digitales ofrecidos a través de ella.
 			</p>
 		</div>
 
 		<div>
 			<h2 class="text-xl font-semibold text-ink mb-3">2. Servicios ofrecidos</h2>
 			<p>
-				Pickea ofrece la venta de servicios digitales que incluyen, entre otros: recargas, suscripciones a plataformas de streaming, licencias de software, tarjetas de regalo y otros productos digitales. Los servicios disponibles se muestran en el catálogo de la plataforma y están sujetos a disponibilidad.
+				Pickea ofrece la venta de servicios digitales que incluyen, entre otros: suscripciones a plataformas de streaming, VPN, herramientas de diseño, cuentas verificadas y otros productos digitales. Los servicios disponibles se muestran en el catálogo de la plataforma y están sujetos a disponibilidad.
 			</p>
 		</div>
 
@@ -33,14 +33,14 @@
 		<div>
 			<h2 class="text-xl font-semibold text-ink mb-3">4. Proceso de compra</h2>
 			<p>
-				Para realizar una compra, el usuario debe completar el formulario de checkout con sus datos personales (nombre, apellidos y número de WhatsApp) y aceptar estos Términos y Condiciones. Una vez enviado el pedido, este será procesado y confirmado a través de WhatsApp.
+				Para realizar una compra, el usuario debe completar el formulario de checkout con sus datos personales (nombre, apellidos y número de WhatsApp) y aceptar estos Términos de Servicio. Una vez enviado el pedido, este será procesado y confirmado a través de WhatsApp.
 			</p>
 		</div>
 
 		<div>
 			<h2 class="text-xl font-semibold text-ink mb-3">5. Forma de pago</h2>
 			<p>
-				El pago se realiza directamente a través de WhatsApp después de confirmar el pedido. Los métodos de pago disponibles serán comunicados por el equipo de Pickea durante el proceso de confirmación.
+				El pago se realiza directamente a través de WhatsApp después de confirmar el pedido. Aceptamos métodos de pago como Enzona y Transfermóvil. Los métodos de pago disponibles serán comunicados por el equipo de Pickea durante el proceso de confirmación.
 			</p>
 		</div>
 
@@ -61,7 +61,7 @@
 		<div>
 			<h2 class="text-xl font-semibold text-ink mb-3">8. Uso de la plataforma</h2>
 			<p>
-				El usuario se compromete a utilizar la plataforma de forma lícita y de acuerdo con estos Términos y Condiciones. Queda prohibido el uso de la plataforma para fines fraudulentos o que contravengan la normativa vigente.
+				El usuario se compromete a utilizar la plataforma de forma lícita y de acuerdo con estos Términos de Servicio. Queda prohibido el uso de la plataforma para fines fraudulentos o que contravengan la normativa vigente.
 			</p>
 		</div>
 
@@ -82,14 +82,14 @@
 		<div>
 			<h2 class="text-xl font-semibold text-ink mb-3">11. Modificaciones</h2>
 			<p>
-				Pickea se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento. Las modificaciones entrarán en vigor desde su publicación en la plataforma. Se recomienda revisar periódicamente esta página.
+				Pickea se reserva el derecho de modificar estos Términos de Servicio en cualquier momento. Las modificaciones entrarán en vigor desde su publicación en la plataforma. Se recomienda revisar periódicamente esta página.
 			</p>
 		</div>
 
 		<div>
 			<h2 class="text-xl font-semibold text-ink mb-3">12. Contacto</h2>
 			<p>
-				Para consultas sobre estos Términos y Condiciones, el usuario puede contactar a Pickea a través de WhatsApp al <strong>+53 63807214</strong>.
+				Para consultas sobre estos Términos de Servicio, el usuario puede contactar a Pickea a través de WhatsApp al <strong>+53 63807214</strong>.
 			</p>
 		</div>
 	</div>

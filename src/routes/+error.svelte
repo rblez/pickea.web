@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>{status} — Pickea</title>
+	<title>Pickea | Error {status}</title>
 </svelte:head>
 
 <div class="min-h-[70vh] flex flex-col items-center justify-center px-4 text-center">

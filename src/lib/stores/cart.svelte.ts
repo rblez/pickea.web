@@ -24,27 +24,33 @@ function createCartStore() {
 		items = loadCart();
 	}
 
-	function addItem(productId: number) {
-		const existing = items.find((i) => i.productId === productId);
+	function addItem(productId: string, variantId?: string) {
+		const existing = items.find(
+			(i) => i.productId === productId && i.variantId === (variantId ?? undefined)
+		);
 		if (existing) {
 			existing.quantity += 1;
 		} else {
-			items.push({ productId, quantity: 1 });
+			items.push({ productId, variantId: variantId ?? undefined, quantity: 1 });
 		}
 		saveCart(items);
 	}
 
-	function removeItem(productId: number) {
-		items = items.filter((i) => i.productId !== productId);
+	function removeItem(productId: string, variantId?: string) {
+		items = items.filter(
+			(i) => !(i.productId === productId && i.variantId === (variantId ?? undefined))
+		);
 		saveCart(items);
 	}
 
-	function updateQuantity(productId: number, quantity: number) {
+	function updateQuantity(productId: string, quantity: number, variantId?: string) {
 		if (quantity <= 0) {
-			removeItem(productId);
+			removeItem(productId, variantId);
 			return;
 		}
-		const item = items.find((i) => i.productId === productId);
+		const item = items.find(
+			(i) => i.productId === productId && i.variantId === (variantId ?? undefined)
+		);
 		if (item) {
 			item.quantity = quantity;
 			saveCart(items);

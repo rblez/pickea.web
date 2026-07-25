@@ -1,20 +1,24 @@
 export type Currency = 'CUP';
 
+export interface Variant {
+	id: string;
+	label: string;
+	price: number;
+}
+
 export interface Product {
-	id: number;
+	id: string;
 	name: string;
 	description: string;
 	image: string;
 	priceUSD: number;
 	currencies: Currency[];
 	category: string;
-	unitSize?: number;
-	discount?: number;
+	variants?: Variant[];
 }
 
 export interface CartItem {
-	productId: number;
+	productId: string;
+	variantId?: string;
 	quantity: number;
 }
-
-export type Route = '/' | '/products' | '/cart' | '/checkout';

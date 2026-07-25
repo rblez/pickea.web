@@ -2,27 +2,38 @@
 	import { cart } from '$lib/stores/cart.svelte';
 	import { formatPrice } from '$lib/data/currencies';
 	import products from '$lib/data/products';
+	import { goto } from '$app/navigation';
+
+	function resolveItem(ci: { productId: string; variantId?: string; quantity: number }) {
+		const product = products.find((p) => p.id === ci.productId);
+		if (!product) return null;
+		const variant = ci.variantId ? product.variants?.find((v) => v.id === ci.variantId) : null;
+		const price = variant ? variant.price : product.priceUSD;
+		const label = variant ? variant.label : null;
+		return { ...ci, product, variant, price, label };
+	}
 
 	let cartProducts = $derived(
-		cart.items
-			.map((ci) => {
-				const product = products.find((p) => p.id === ci.productId);
-				return product ? { ...ci, product } : null;
-			})
-			.filter((x): x is NonNullable<typeof x> => x !== null)
+		cart.items.map(resolveItem).filter((x): x is NonNullable<typeof x> => x !== null)
 	);
 
 	let totalCUP = $derived(
-		cartProducts.reduce((sum, cp) => sum + cp.product.priceUSD * cp.quantity, 0)
+		cartProducts.reduce((sum, cp) => sum + cp.price * cp.quantity, 0)
 	);
 
 	let totalFormatted = $derived(formatPrice(totalCUP, 'CUP'));
 
 	let cartEmpty = $derived(cart.items.length === 0);
+
+	$effect(() => {
+		if (cartEmpty) {
+			goto('/');
+		}
+	});
 </script>
 
 <svelte:head>
-	<title>Mi carrito — Pickea</title>
+	<title>Pickea | Carrito</title>
 </svelte:head>
 
 <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-section">
@@ -42,30 +53,39 @@
 		<div class="space-y-4 mb-8">
 			{#each cartProducts as cp}
 				<div class="flex items-center gap-4 bg-card border border-hairline rounded-card p-4">
-					<img
-						src={'/images/' + cp.product.image}
-						alt={cp.product.name}
-						class="w-20 h-20 object-cover rounded-lg bg-bone flex-shrink-0"
-					/>
+					{#if cp.product.image}
+						<img
+							src={'/images/' + cp.product.image}
+							alt={cp.product.name}
+							class="w-20 h-20 object-cover rounded-lg bg-canvas flex-shrink-0"
+						/>
+					{:else}
+						<div class="w-20 h-20 rounded-lg bg-canvas flex items-center justify-center flex-shrink-0">
+							<i class="ri-image-line text-2xl text-muted-soft"></i>
+						</div>
+					{/if}
 					<div class="flex-1 min-w-0">
 						<h3 class="font-semibold text-ink truncate">{cp.product.name}</h3>
+						{#if cp.label}
+							<p class="text-xs text-ember mt-0.5">{cp.label}</p>
+						{/if}
 						<p class="text-sm text-muted mt-0.5">
-							{formatPrice(cp.product.priceUSD, 'CUP')} c/u
+							{formatPrice(cp.price, 'CUP')} c/u
 						</p>
 					</div>
 					<div class="flex items-center gap-2">
 						<button
-							onclick={() => cart.updateQuantity(cp.productId, cp.quantity - 1)}
+							onclick={() => cart.updateQuantity(cp.productId, cp.quantity - 1, cp.variantId)}
 							class="w-8 h-8 flex items-center justify-center border border-hairline rounded-md text-ink hover:bg-bone transition-colors cursor-pointer text-lg"
 						>-</button>
 						<span class="w-8 text-center font-medium text-ink">{cp.quantity}</span>
 						<button
-							onclick={() => cart.updateQuantity(cp.productId, cp.quantity + 1)}
+							onclick={() => cart.updateQuantity(cp.productId, cp.quantity + 1, cp.variantId)}
 							class="w-8 h-8 flex items-center justify-center border border-hairline rounded-md text-ink hover:bg-bone transition-colors cursor-pointer text-lg"
 						>+</button>
 					</div>
 					<button
-						onclick={() => cart.removeItem(cp.productId)}
+						onclick={() => cart.removeItem(cp.productId, cp.variantId)}
 						class="p-2 text-muted-soft hover:text-error transition-colors cursor-pointer"
 						aria-label="Eliminar"
 					>

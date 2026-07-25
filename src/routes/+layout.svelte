@@ -5,6 +5,7 @@
 	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
 	import SplashScreen from '$lib/components/SplashScreen.svelte';
 	import OfflineBanner from '$lib/components/OfflineBanner.svelte';
+	import { getModalOpen } from '$lib/stores/modal.svelte';
 
 	let { children } = $props();
 	let splashDone = $state(false);
@@ -20,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>Pickea — Servicios digitales para Cuba</title>
+	<title>Pickea | Servicios digitales para Cuba</title>
 </svelte:head>
 
 {#if !splashDone}

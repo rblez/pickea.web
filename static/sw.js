@@ -1,7 +1,5 @@
-const CACHE_NAME = 'pickea-v5';
-const PRECACHE = [
-	'/',
-	'/manifest.json',
+const CACHE_NAME = 'pickea-v6';
+const STATIC_ASSETS = [
 	'/images/pickea-isotipo.png',
 	'/images/pickea.jpg',
 	'/fonts/SF-Pro-Rounded-Regular.otf',
@@ -12,7 +10,7 @@ const PRECACHE = [
 self.addEventListener('install', (event) => {
 	event.waitUntil(
 		caches.open(CACHE_NAME)
-			.then((cache) => cache.addAll(PRECACHE))
+			.then((cache) => cache.addAll(STATIC_ASSETS))
 			.then(() => self.skipWaiting())
 	);
 });
@@ -30,21 +28,22 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
 	if (event.request.method !== 'GET') return;
 
-	event.respondWith(
-		caches.match(event.request).then((cached) => {
-			if (cached) return cached;
+	const url = new URL(event.request.url);
 
-			return fetch(event.request).then((response) => {
-				if (response.ok && (event.request.url.startsWith('http'))) {
+	if (url.origin === location.origin && url.pathname.startsWith('/_app/immutable/')) {
+		event.respondWith(caches.match(event.request));
+		return;
+	}
+
+	event.respondWith(
+		fetch(event.request)
+			.then((response) => {
+				if (response.ok) {
 					const clone = response.clone();
 					caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
 				}
 				return response;
-			}).catch(() => {
-				if (event.request.destination === 'document') {
-					return caches.match('/');
-				}
-			});
-		})
+			})
+			.catch(() => caches.match(event.request))
 	);
 });
