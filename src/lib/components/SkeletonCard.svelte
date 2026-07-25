@@ -5,7 +5,7 @@
 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 	{#each Array(count) as _, i}
 		<div class="bg-card border border-hairline rounded-card overflow-hidden animate-pulse">
-			<div class="aspect-[4/3] bg-bone"></div>
+			<div class="aspect-[4/3] bg-canvas"></div>
 			<div class="p-5 space-y-3">
 				<div class="h-5 bg-bone rounded w-3/4"></div>
 				<div class="space-y-1.5">

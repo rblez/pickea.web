@@ -3,11 +3,22 @@
 	import { formatPrice } from '$lib/data/currencies';
 	import { cart } from '$lib/stores/cart.svelte';
 	import { goto } from '$app/navigation';
+	import { setModalOpen } from '$lib/stores/modal.svelte';
 
 	let { product, onclose }: { product: Product; onclose: () => void } = $props();
 
 	let imgSrc = $derived('/images/' + product.image);
 	let showShare = $state(false);
+	let imgError = $state(false);
+
+	$effect(() => {
+		setModalOpen(true);
+		document.body.style.overflow = 'hidden';
+		return () => {
+			setModalOpen(false);
+			document.body.style.overflow = '';
+		};
+	});
 
 	function buyNow() {
 		cart.clear();
@@ -68,8 +79,10 @@
 		onclick={(e) => e.stopPropagation()}
 	>
 		<div class="relative flex-shrink-0">
-			<div class="aspect-[16/9] sm:aspect-[4/3] bg-bone overflow-hidden sm:rounded-t-card">
-				<img src={imgSrc} alt={product.name} class="w-full h-full object-cover" />
+			<div class="aspect-[16/9] sm:aspect-[4/3] bg-canvas overflow-hidden sm:rounded-t-card">
+				{#if !imgError}
+					<img src={imgSrc} alt={product.name} class="w-full h-full object-cover" onerror={() => imgError = true} />
+				{/if}
 			</div>
 			<button
 				onclick={onclose}
