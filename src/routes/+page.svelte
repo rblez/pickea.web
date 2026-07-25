@@ -43,29 +43,7 @@
 
 <svelte:window onkeydown={handleKeydown} />
 
-<!-- Hero -->
-<section class="relative overflow-hidden border-b border-hairline bg-canvas">
-	<div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
-		<img src={'/images/pickea-isotipo.png'} alt="" class="h-14 w-auto mx-auto mb-6 opacity-80" />
-		<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-ink leading-tight">
-			Servicios digitales<br />
-			<span class="text-ember">para Cuba</span>
-		</h1>
-		<p class="mt-4 text-lg sm:text-xl text-body max-w-xl mx-auto">
-			Recargas, streaming, suscripciones, licencias y más. Compra y paga fácil desde tu celular.
-		</p>
-		<a
-			href="#catalogo"
-			class="mt-8 inline-flex items-center gap-2 bg-ember text-white px-6 py-3 rounded-btn text-sm font-medium transition-all duration-200 hover:bg-ember-active active:scale-[0.98] no-underline"
-		>
-			Ver servicios
-			<i class="ri-arrow-down-line"></i>
-		</a>
-	</div>
-</section>
-
-<!-- Catálogo -->
-<section id="catalogo" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-section">
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-section">
 	<div class="mb-8">
 		<h1 class="text-3xl sm:text-4xl font-bold text-ink">Catálogo</h1>
 		<p class="mt-2 text-body">{filtered.length} servicios disponibles</p>
