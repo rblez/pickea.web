@@ -25,7 +25,7 @@
 	<img
 		src={'/images/pickea-isotipo.png'}
 		alt="Pickea"
-		class="h-20 w-auto animate-pulse-icon"
+		class="h-20 w-auto"
 	/>
 	<div class="w-40 h-1.5 bg-white/10 rounded-full overflow-hidden">
 		<div
