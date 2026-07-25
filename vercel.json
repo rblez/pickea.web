@@ -2,5 +2,9 @@
 	"buildCommand": "bun run build",
 	"outputDirectory": "build",
 	"installCommand": "bun install",
-	"framework": "sveltekit"
+	"framework": null,
+	"cleanUrls": true,
+	"rewrites": [
+		{ "source": "/(.*)", "destination": "/404.html" }
+	]
 }
