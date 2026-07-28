@@ -50,7 +50,7 @@ jobs:
             size="${entry##*:}"
             dir="android/app/src/main/res/mipmap-${density}"
 
-            convert static/images/pickea-isotipo.png -resize ${size}x${size} -background none -gravity center -extent ${size}x${size} "$dir/ic_launcher.png"
+            convert static/images/pickea.jpg -resize ${size}x${size} -background '#080808' -gravity center -extent ${size}x${size} "$dir/ic_launcher.png"
             cp "$dir/ic_launcher.png" "$dir/ic_launcher_round.png"
             cp "$dir/ic_launcher.png" "$dir/ic_launcher_foreground.png"
           done
