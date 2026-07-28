@@ -1,6 +1,15 @@
 {
-	"name": "store",
-	"version": "0.0.1",
+	"name": "pickea",
+	"version": "1.0.0-beta",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+	},
 	"devDependencies": {
 		"@capacitor/android": "^8.4.2",
 		"@capacitor/cli": "^8.4.2",
@@ -14,15 +23,5 @@
 		"tailwindcss": "^4.1.4",
 		"typescript": "^6.0.3",
 		"vite": "^8.0.16"
-	},
-	"private": true,
-	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
-	},
-	"type": "module"
+	}
 }
