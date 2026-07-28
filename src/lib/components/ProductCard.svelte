@@ -7,6 +7,18 @@
 
 	let imgError = $state(false);
 
+	let isAgotado = $derived(
+		product.agotado ||
+		(product.variants && product.variants.length > 0 && product.variants.every(v => v.agotado)) ||
+		false
+	);
+
+	let minPrice = $derived(
+		product.variants
+			? Math.min(...product.variants.filter(v => !v.agotado).map(v => v.price))
+			: product.priceUSD
+	);
+
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === 'Enter' || e.key === ' ') {
 			e.preventDefault();
@@ -39,8 +51,10 @@
 		<p class="text-xs sm:text-sm text-body leading-relaxed line-clamp-2">{product.description}</p>
 
 		<p class="text-base sm:text-xl font-bold text-ember">
-			{#if product.variants && product.variants.length > 0}
-				Desde {formatPrice(Math.min(...product.variants.map(v => v.price)), 'CUP')}
+			{#if isAgotado}
+				<span class="text-muted-soft">Agotado</span>
+			{:else if product.variants && product.variants.length > 0}
+				Desde {formatPrice(minPrice, 'CUP')}
 			{:else}
 				{formatPrice(product.priceUSD, 'CUP')}
 			{/if}
@@ -48,9 +62,13 @@
 
 		<button
 			onclick={(e) => { e.stopPropagation(); goto('/p/' + product.id); }}
-			class="w-full mt-2 bg-ember text-white px-4 py-2.5 rounded-btn text-sm font-medium transition-all duration-200 hover:bg-ember-active active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+			disabled={isAgotado}
+			class="w-full mt-2 px-4 py-2.5 rounded-btn text-sm font-medium transition-all duration-200 cursor-pointer flex items-center justify-center gap-2
+				{isAgotado
+					? 'bg-bone text-muted-soft cursor-not-allowed'
+					: 'bg-ember text-white hover:bg-ember-active active:scale-[0.98]'}"
 		>
-			Ver opciones
+			{isAgotado ? 'Agotado' : 'Ver opciones'}
 		</button>
 	</div>
 </div>

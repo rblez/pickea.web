@@ -13,6 +13,7 @@
 	let selectedVariant = $state(product.variants?.[0] ?? null);
 
 	let currentPrice = $derived(selectedVariant ? selectedVariant.price : product.priceUSD);
+	let isAgotado = $derived(product.agotado || selectedVariant?.agotado || false);
 
 	$effect(() => {
 		setModalOpen(true);
@@ -111,10 +112,13 @@
 						{#each product.variants as variant}
 							<button
 								onclick={() => selectedVariant = variant}
-								class="px-4 py-2 text-sm font-medium rounded-full border transition-all duration-200 cursor-pointer
-									{selectedVariant?.id === variant.id
-										? 'bg-ember text-white border-ember shadow-lg shadow-ember/20'
-										: 'bg-card text-body border-hairline hover:border-ember/50 hover:text-ember'}"
+								disabled={variant.agotado}
+								class="px-4 py-2 text-sm font-medium rounded-full border transition-all duration-200
+									{variant.agotado
+										? 'border-hairline text-muted-soft cursor-not-allowed line-through'
+										: selectedVariant?.id === variant.id
+											? 'bg-ember text-white border-ember shadow-lg shadow-ember/20 cursor-pointer'
+											: 'bg-card text-body border-hairline hover:border-ember/50 hover:text-ember cursor-pointer'}"
 							>
 								{variant.label}
 							</button>
@@ -123,27 +127,42 @@
 				</div>
 			{/if}
 
-			<div class="bg-bone rounded-btn p-3 sm:p-4">
-				<p class="text-xs sm:text-sm text-muted mb-0.5">Precio</p>
-				<p class="text-xl sm:text-2xl font-bold text-ember">{formatPrice(currentPrice, 'CUP')}</p>
-			</div>
+			{#if isAgotado}
+				<div class="bg-bone rounded-btn p-3 sm:p-4 text-center">
+					<p class="text-sm font-medium text-muted-soft">Producto agotado</p>
+				</div>
+			{:else}
+				<div class="bg-bone rounded-btn p-3 sm:p-4">
+					<p class="text-xs sm:text-sm text-muted mb-0.5">Precio</p>
+					<p class="text-xl sm:text-2xl font-bold text-ember">{formatPrice(currentPrice, 'CUP')}</p>
+				</div>
+			{/if}
 
 			<div class="mt-auto space-y-3">
-				<div class="flex gap-3">
+				{#if isAgotado}
 					<button
-						onclick={buyNow}
-						class="flex-1 bg-ember text-white px-5 py-3 rounded-btn text-sm sm:text-base font-medium transition-all duration-200 hover:bg-ember-active active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+						disabled
+						class="w-full bg-bone text-muted-soft px-5 py-3 rounded-btn text-sm sm:text-base font-medium cursor-not-allowed"
 					>
-						Comprar
+						Agotado
 					</button>
-					<button
-						onclick={() => { cart.addItem(product.id, selectedVariant?.id); }}
-						class="flex-1 px-5 py-3 border border-hairline text-body rounded-btn text-sm sm:text-base font-medium transition-all duration-200 hover:bg-bone cursor-pointer flex items-center justify-center gap-2"
-					>
-						<i class="ri-add-line"></i>
-						Añadir al carrito
-					</button>
-				</div>
+				{:else}
+					<div class="flex gap-3">
+						<button
+							onclick={buyNow}
+							class="flex-1 bg-ember text-white px-5 py-3 rounded-btn text-sm sm:text-base font-medium transition-all duration-200 hover:bg-ember-active active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+						>
+							Comprar
+						</button>
+						<button
+							onclick={() => { cart.addItem(product.id, selectedVariant?.id); }}
+							class="flex-1 px-5 py-3 border border-hairline text-body rounded-btn text-sm sm:text-base font-medium transition-all duration-200 hover:bg-bone cursor-pointer flex items-center justify-center gap-2"
+						>
+							<i class="ri-add-line"></i>
+							Añadir al carrito
+						</button>
+					</div>
+				{/if}
 
 				<!-- Share -->
 				<div class="relative">

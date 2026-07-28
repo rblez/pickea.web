@@ -77,8 +77,9 @@
 		"currencies": ["CUP"],
 		"category": "suscripciones",
 		"variants": [
-			{ "id": "ss-1m", "label": "1 mes", "price": 1200 }
-		]
+			{ "id": "ss-1m", "label": "1 mes", "price": 1200, "agotado": true }
+		],
+		"agotado": true
 	},
 	{
 		"id": "eT3cs4x6",
@@ -116,8 +117,8 @@
 			{ "id": "ff-572", "label": "572", "price": 4550 },
 			{ "id": "ff-1160", "label": "1,160", "price": 9100 },
 			{ "id": "ff-2398", "label": "2,398", "price": 18200 },
-			{ "id": "ff-booyah", "label": "Pass Booyah", "price": 4000 },
-			{ "id": "ff-semanal", "label": "M. Semanal", "price": 1820 },
+			{ "id": "ff-booyah", "label": "Pass Booyah", "price": 4000, "agotado": true },
+			{ "id": "ff-semanal", "label": "M. Semanal", "price": 1820, "agotado": true },
 			{ "id": "ff-mensual", "label": "M. Mensual", "price": 10100 }
 		]
 	}

@@ -4,6 +4,7 @@ export interface Variant {
 	id: string;
 	label: string;
 	price: number;
+	agotado?: boolean;
 }
 
 export interface Product {
@@ -15,6 +16,7 @@ export interface Product {
 	currencies: Currency[];
 	category: string;
 	variants?: Variant[];
+	agotado?: boolean;
 }
 
 export interface CartItem {
