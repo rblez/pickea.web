@@ -5,7 +5,6 @@
 	"framework": null,
 	"cleanUrls": true,
 	"rewrites": [
-		{ "source": "/download/pickea.apk", "destination": "https://github.com/rblez/pickea.web/releases/latest/download/pickea.apk" },
 		{ "source": "/(.*)", "destination": "/404.html" }
 	]
 }

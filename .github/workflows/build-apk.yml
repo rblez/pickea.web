@@ -64,13 +64,15 @@ jobs:
           ./gradlew assembleDebug
           cp app/build/outputs/apk/debug/app-debug.apk ../pickea.apk
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: beta-${{ github.run_number }}
-          name: Beta ${{ github.run_number }}
-          body: |
-            APK generado automáticamente desde commit ${{ github.sha }}
-          files: pickea.apk
-          generate_release_notes: false
-          make_latest: true
+      - name: Commit APK to repo
+        run: |
+          mkdir -p static/apk
+          cp pickea.apk static/apk/pickea.apk
+          git config user.name "pickea-bot"
+          git config user.email "bot@pickea.rblez.com"
+          git add static/apk/pickea.apk
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update APK [skip ci]"
+            git push
