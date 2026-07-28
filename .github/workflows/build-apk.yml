@@ -76,3 +76,4 @@ jobs:
           else
             git commit -m "chore: update APK [skip ci]"
             git push
+          fi
