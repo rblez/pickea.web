@@ -65,13 +65,13 @@
 						</div>
 					{/if}
 					<div class="flex-1 min-w-0">
-						<h3 class="font-semibold text-ink truncate">{cp.product.name}</h3>
-						{#if cp.label}
-							<p class="text-xs text-ember mt-0.5">{cp.label}</p>
-						{/if}
-						<p class="text-sm text-muted mt-0.5">
-							{formatPrice(cp.price, 'CUP')} c/u
-						</p>
+						<h3 class="font-semibold text-ink truncate">
+							{cp.product.name}
+							{#if cp.label}
+								<span class="text-xs text-ember font-normal"> — {cp.label}</span>
+							{/if}
+						</h3>
+						<p class="text-sm text-muted mt-0.5">{formatPrice(cp.price, 'CUP')}</p>
 					</div>
 					<div class="flex items-center gap-2">
 						<button
@@ -105,8 +105,7 @@
 				href={'/checkout'}
 				class="mt-6 w-full flex items-center justify-center gap-2 bg-ember text-white px-6 py-3 rounded-btn text-base font-medium transition-all duration-200 hover:bg-ember-active active:scale-[0.98] no-underline"
 			>
-				Proceder al pago
-				<i class="ri-arrow-right-line"></i>
+				Proceder
 			</a>
 		</div>
 	{/if}

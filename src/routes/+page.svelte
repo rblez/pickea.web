@@ -55,6 +55,13 @@
 		const t = setTimeout(() => loaded = true, 400);
 		return () => clearTimeout(t);
 	});
+
+	$effect(() => {
+		const categoryParam = $page.url.searchParams.get('category') || null;
+		if (categoryParam !== $selectedCategory) {
+			$selectedCategory = categoryParam;
+		}
+	});
 </script>
 
 <svelte:head>
@@ -66,6 +73,14 @@
 <svelte:window onkeydown={handleKeydown} />
 
 <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-section">
+
+	<a href="/p/paypal-argentina" class="block mb-8 rounded-card overflow-hidden hover:opacity-90 transition-opacity">
+		<img
+			src="/images/banner-paypal.webp"
+			alt="PayPal Argentina — Recarga tu cuenta desde Cuba"
+			class="w-full h-auto"
+		/>
+	</a>
 
 	<!-- Category pills -->
 	<div class="flex flex-wrap gap-2 mb-8">

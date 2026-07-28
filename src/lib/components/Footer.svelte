@@ -24,15 +24,12 @@
 			{/each}
 		</div>
 
-		<div class="flex items-center gap-3">
-			<p class="text-xs text-muted-soft">Métodos de pago:</p>
-			<div class="flex items-center gap-2">
-				<div class="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-hairline">
-					<img src="/images/enzona.png" alt="Enzona" class="w-9 h-9 object-contain" />
-				</div>
-				<div class="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-hairline">
-					<img src="/images/transfermovil.png" alt="Transfermóvil" class="w-9 h-9 object-contain" />
-				</div>
+		<div class="flex items-center gap-2">
+			<div class="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-hairline">
+				<img src="/images/enzona.png" alt="Enzona" class="w-9 h-9 object-contain" />
+			</div>
+			<div class="w-12 h-12 flex items-center justify-center rounded-full bg-white border border-hairline">
+				<img src="/images/transfermovil.png" alt="Transfermóvil" class="w-9 h-9 object-contain" />
 			</div>
 		</div>
 
