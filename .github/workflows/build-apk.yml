@@ -51,7 +51,7 @@ jobs:
             dir="android/app/src/main/res/mipmap-${density}"
             inner=$((size * 65 / 100))
 
-            convert -size ${size}x${size} xc:none \
+            convert -size ${size}x${size} xc:'#080808' \
               static/images/pickea-isotipo.png \
               -resize ${inner}x${inner} \
               -gravity center \
