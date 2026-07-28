@@ -2,36 +2,18 @@
 	import { page } from '$app/stores';
 	import { cart } from '$lib/stores/cart.svelte';
 	import { searchQuery } from '$lib/stores/filters.svelte';
-	import { onMount } from 'svelte';
 
 	let totalItems = $derived(cart.totalItems());
 	let searchInput: HTMLInputElement | undefined = $state();
 
-	onMount(() => {
-		const urlQ = $page.url.searchParams.get('q') || '';
-		if (urlQ !== $searchQuery) {
-			$searchQuery = urlQ;
-		}
-	});
-
 	function handleSearch(e: Event) {
 		$searchQuery = (e.target as HTMLInputElement).value;
-		const url = new URL(window.location.href);
-		if ($searchQuery) {
-			url.searchParams.set('q', $searchQuery);
-		} else {
-			url.searchParams.delete('q');
-		}
-		history.replaceState(history.state, '', url.pathname + url.search);
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === 'Escape' && document.activeElement === searchInput) {
 			searchInput.blur();
 			$searchQuery = '';
-			const url = new URL(window.location.href);
-			url.searchParams.delete('q');
-			history.replaceState(history.state, '', url.pathname + url.search);
 		}
 	}
 </script>

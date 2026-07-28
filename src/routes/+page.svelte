@@ -28,19 +28,11 @@
 
 	function setCategory(slug: string | null) {
 		$selectedCategory = slug;
-		const url = new URL(window.location.href);
-		if (slug) {
-			url.searchParams.set('category', slug);
-		} else {
-			url.searchParams.delete('category');
-		}
-		history.replaceState(history.state, '', url.pathname + url.search);
 	}
 
 	function clearFilters() {
 		$searchQuery = '';
 		$selectedCategory = null;
-		history.replaceState(history.state, '', '/');
 	}
 
 	function handleKeydown(e: KeyboardEvent) {
