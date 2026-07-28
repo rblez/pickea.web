@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pickea-v7';
+const CACHE_NAME = 'pickea-v8';
 const STATIC_ASSETS = [
 	'/images/pickea-isotipo.png',
 	'/images/pickea.jpg',
@@ -23,6 +23,11 @@ self.addEventListener('activate', (event) => {
 				keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k))
 			))
 			.then(() => self.clients.claim())
+			.then(() => {
+				self.clients.matchAll().then((clients) => {
+					clients.forEach((client) => client.postMessage('sw-update'));
+				});
+			})
 	);
 });
 
@@ -30,15 +35,19 @@ self.addEventListener('fetch', (event) => {
 	if (event.request.method !== 'GET') return;
 
 	event.respondWith(
-		caches.match(event.request).then((cached) => {
-			if (cached) return cached;
-			return fetch(event.request).then((response) => {
+		fetch(event.request)
+			.then((response) => {
 				if (response.ok && response.type === 'basic') {
 					const clone = response.clone();
 					caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
 				}
 				return response;
-			}).catch(() => new Response('', { status: 200 }));
-		})
+			})
+			.catch(() => {
+				return caches.match(event.request).then((cached) => {
+					if (cached) return cached;
+					return new Response('', { status: 200 });
+				});
+			})
 	);
 });
