@@ -70,7 +70,8 @@ jobs:
       - name: Build APK
         run: |
           cd android
-          ./gradlew assembleDebug
+          # Only build for arm64-v8a to reduce APK size (drops x86, x86_64, armeabi-v7a)
+          ./gradlew assembleDebug -PabiFilters=arm64-v8a
           cp app/build/outputs/apk/debug/app-debug.apk ../pickea.apk
 
       - name: Create Release
@@ -83,17 +84,3 @@ jobs:
           files: pickea.apk
           generate_release_notes: false
           make_latest: true
-
-      - name: Commit APK to repo
-        run: |
-          mkdir -p static/apk
-          cp pickea.apk static/apk/pickea.apk
-          git config user.name "pickea-bot"
-          git config user.email "bot@pickea.rblez.com"
-          git add static/apk/pickea.apk
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: update APK [skip ci]"
-            git push
-          fi
