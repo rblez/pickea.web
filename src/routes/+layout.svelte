@@ -4,7 +4,7 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
 	import OfflineBanner from '$lib/components/OfflineBanner.svelte';
-	import { getModalOpen } from '$lib/stores/modal.svelte';
+	import DownloadBanner from '$lib/components/DownloadBanner.svelte';
 
 	let { children } = $props();
 </script>
@@ -16,6 +16,7 @@
 <Navbar />
 <ScrollToTop />
 <OfflineBanner />
+<DownloadBanner />
 <main class="min-h-[calc(100vh-4rem)]">
 	{@render children()}
 </main>
