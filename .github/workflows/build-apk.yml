@@ -49,8 +49,14 @@ jobs:
             density="${entry%%:*}"
             size="${entry##*:}"
             dir="android/app/src/main/res/mipmap-${density}"
+            inner=$((size * 65 / 100))
 
-            convert static/images/pickea.jpg -resize ${size}x${size} -background '#080808' -gravity center -extent ${size}x${size} "$dir/ic_launcher.png"
+            convert -size ${size}x${size} xc:none \
+              static/images/pickea-isotipo.png \
+              -resize ${inner}x${inner} \
+              -gravity center \
+              -composite \
+              "$dir/ic_launcher.png"
             cp "$dir/ic_launcher.png" "$dir/ic_launcher_round.png"
             cp "$dir/ic_launcher.png" "$dir/ic_launcher_foreground.png"
           done
