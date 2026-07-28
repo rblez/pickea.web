@@ -50,7 +50,7 @@
 					class="flex items-center transition-colors duration-200 no-underline
 						{$page.url.pathname === '/' ? 'text-ember' : 'text-body hover:text-ink'}"
 				>
-					<i class="ri-home-line text-xl sm:text-lg"></i>
+					<i class="{$page.url.pathname === '/' ? 'ri-home-4-fill' : 'ri-home-4-line'} text-xl sm:text-lg"></i>
 					<span class="hidden sm:inline text-sm font-medium ml-1.5">Inicio</span>
 				</a>
 				<a
