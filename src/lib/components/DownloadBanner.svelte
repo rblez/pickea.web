@@ -1,14 +1,14 @@
 <script lang="ts">
 	let visible = $state(false);
 	let dismissed = $state(false);
-	let isDownloadPage = $state(false);
+	let isNative = $state(false);
 
 	$effect(() => {
-		isDownloadPage = window.location.pathname === '/download';
+		isNative = typeof window !== 'undefined' && typeof (window as any).Capacitor !== 'undefined';
 	});
 
 	$effect(() => {
-		if (!dismissed && !isDownloadPage) {
+		if (!dismissed && !isNative) {
 			const t = setTimeout(() => visible = true, 8000);
 			return () => clearTimeout(t);
 		}
