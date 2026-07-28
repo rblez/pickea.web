@@ -214,7 +214,8 @@
 						<i class="ri-loader-4-line animate-spin"></i>
 						Enviando...
 					{:else}
-						Enviar por WhatsApp — {totalFormatted}
+						<i class="ri-whatsapp-line"></i>
+						{totalFormatted}
 					{/if}
 				</button>
 			</form>
