@@ -40,6 +40,19 @@ jobs:
       - name: Generate Android project
         run: npx cap add android
 
+      - name: Apply Pickea branding
+        run: |
+          SIZES=("mdpi:48" "hdpi:72" "xhdpi:96" "xxhdpi:144" "xxxhdpi:192")
+          for entry in "${SIZES[@]}"; do
+            density="${entry%%:*}"
+            size="${entry##*:}"
+            dir="android/app/src/main/res/mipmap-${density}"
+
+            convert static/images/pickea-isotipo.png -resize ${size}x${size} -background none -gravity center -extent ${size}x${size} "$dir/ic_launcher.png"
+            cp "$dir/ic_launcher.png" "$dir/ic_launcher_round.png"
+            cp "$dir/ic_launcher.png" "$dir/ic_launcher_foreground.png"
+          done
+
       - name: Sync Capacitor
         run: npx cap sync android
 
