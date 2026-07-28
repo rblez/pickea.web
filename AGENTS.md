@@ -11,7 +11,7 @@
 
 ## Key architecture
 - **Fully static SPA** — no load functions, form actions, API routes, or endpoints
-- Navbar search + category pills use shared rune state in `src/lib/stores/filters.svelte.ts`
+- Navbar search + category pills use shared writable stores in `src/lib/stores/filters.svelte.ts`
 - Cart is `$state` runes + localStorage in `src/lib/stores/cart.svelte.ts`
 - Checkout sends order via WhatsApp to `+53 63807214`
 - Product catalog: `src/lib/data/products.json`; import via `$lib/data/products`
