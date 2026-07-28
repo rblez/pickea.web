@@ -34,5 +34,9 @@
 		</div>
 
 		<p class="text-xs text-muted-soft">&copy; {year} Pickea v1.0.01(beta). Todos los derechos reservados.</p>
+
+		<a href="/download" class="text-xs text-muted-soft hover:text-ember transition-colors no-underline">
+			Descargar APK
+		</a>
 	</div>
 </footer>
