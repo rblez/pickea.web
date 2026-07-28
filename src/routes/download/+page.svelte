@@ -4,6 +4,18 @@
 <svelte:head>
 	<title>Pickea | Descargar APK</title>
 	<meta name="description" content="Descarga la app Pickea para Android. Accede rápido a recargas, streaming y más desde tu móvil." />
+	<meta property="og:title" content="Pickea | Descargar APK para Android" />
+	<meta property="og:description" content="Descarga la app Pickea para Android. Recargas, streaming, suscripciones y más desde tu móvil." />
+	<meta property="og:image" content="https://pickea.rblez.com/images/pickea.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:url" content="https://pickea.rblez.com/download" />
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="es_CU" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Pickea | Descargar APK para Android" />
+	<meta name="twitter:description" content="Descarga la app Pickea para Android. Recargas, streaming, suscripciones y más desde tu móvil." />
+	<meta name="twitter:image" content="https://pickea.rblez.com/images/pickea.jpg" />
 </svelte:head>
 
 <section class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-section text-center">
