@@ -48,7 +48,7 @@
 		</p>
 
 		<a
-			href="/download"
+			href="/download/pickea.apk"
 			onclick={dismiss}
 			class="flex items-center justify-center gap-1.5 w-full bg-ember text-white px-3 py-2 rounded-btn text-xs font-medium transition-all duration-200 hover:bg-ember-active no-underline"
 		>

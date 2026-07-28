@@ -50,7 +50,7 @@ jobs:
             size="${entry##*:}"
             dir="android/app/src/main/res/mipmap-${density}"
 
-            convert static/images/pickea.jpg -resize ${size}x${size} -background '#080808' -gravity center -extent ${size}x${size} "$dir/ic_launcher.png"
+            convert static/images/pickea.jpg -resize ${size}x${size} "$dir/ic_launcher.png"
             cp "$dir/ic_launcher.png" "$dir/ic_launcher_round.png"
             cp "$dir/ic_launcher.png" "$dir/ic_launcher_foreground.png"
           done
@@ -62,6 +62,7 @@ jobs:
         run: |
           cd android
           ./gradlew assembleDebug
+          cp app/build/outputs/apk/debug/app-debug.apk ../pickea.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
@@ -70,6 +71,6 @@ jobs:
           name: Beta ${{ github.run_number }}
           body: |
             APK generado automáticamente desde commit ${{ github.sha }}
-          files: android/app/build/outputs/apk/debug/app-debug.apk
+          files: pickea.apk
           generate_release_notes: false
           make_latest: true

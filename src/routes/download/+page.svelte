@@ -32,7 +32,7 @@
 		</p>
 
 		<a
-			href="https://github.com/rblez/pickea.web/releases/latest/download/app-debug.apk"
+			href="/download/pickea.apk"
 			class="inline-flex items-center gap-2 bg-ember text-white px-8 py-3.5 rounded-btn text-base font-medium transition-all duration-200 hover:bg-ember-active active:scale-[0.98] no-underline"
 		>
 			<i class="ri-download-line text-lg"></i>
