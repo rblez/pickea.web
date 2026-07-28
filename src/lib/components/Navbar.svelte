@@ -1,23 +1,24 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { cart } from '$lib/stores/cart.svelte';
-	import { filters } from '$lib/stores/filters.svelte';
+	import { searchQuery } from '$lib/stores/filters.svelte';
+	import { onMount } from 'svelte';
 
 	let totalItems = $derived(cart.totalItems());
 	let searchInput: HTMLInputElement | undefined = $state();
 
-	$effect(() => {
+	onMount(() => {
 		const urlQ = $page.url.searchParams.get('q') || '';
-		if (urlQ !== filters.searchQuery) {
-			filters.searchQuery = urlQ;
+		if (urlQ !== $searchQuery) {
+			$searchQuery = urlQ;
 		}
 	});
 
 	function handleSearch(e: Event) {
-		filters.searchQuery = (e.target as HTMLInputElement).value;
+		$searchQuery = (e.target as HTMLInputElement).value;
 		const url = new URL(window.location.href);
-		if (filters.searchQuery) {
-			url.searchParams.set('q', filters.searchQuery);
+		if ($searchQuery) {
+			url.searchParams.set('q', $searchQuery);
 		} else {
 			url.searchParams.delete('q');
 		}
@@ -27,7 +28,7 @@
 	function handleKeydown(e: KeyboardEvent) {
 		if (e.key === 'Escape' && document.activeElement === searchInput) {
 			searchInput.blur();
-			filters.searchQuery = '';
+			$searchQuery = '';
 			const url = new URL(window.location.href);
 			url.searchParams.delete('q');
 			history.replaceState(history.state, '', url.pathname + url.search);
@@ -53,7 +54,7 @@
 							bind:this={searchInput}
 							type="text"
 							placeholder="Buscar..."
-							value={filters.searchQuery}
+							value={$searchQuery}
 							oninput={handleSearch}
 							class="w-full pl-9 pr-3 py-1.5 bg-card border border-hairline rounded-full text-sm text-ink placeholder:text-muted-soft focus:outline-none focus:border-ember transition-colors"
 						/>
@@ -94,7 +95,7 @@
 				<input
 					type="text"
 					placeholder="Buscar servicios..."
-					value={filters.searchQuery}
+					value={$searchQuery}
 					oninput={handleSearch}
 					class="w-full pl-9 pr-3 py-2 bg-card border border-hairline rounded-full text-sm text-ink placeholder:text-muted-soft focus:outline-none focus:border-ember transition-colors"
 				/>

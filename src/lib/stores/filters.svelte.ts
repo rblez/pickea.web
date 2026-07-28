@@ -1,5 +1,4 @@
-class FilterState {
-	searchQuery = $state('');
-	selectedCategory = $state<string | null>(null);
-}
-export const filters = new FilterState();
+import { writable } from 'svelte/store';
+
+export const searchQuery = writable('');
+export const selectedCategory = writable<string | null>(null);

@@ -4,15 +4,15 @@
 	import ProductCard from '$lib/components/ProductCard.svelte';
 	import SkeletonCard from '$lib/components/SkeletonCard.svelte';
 	import products from '$lib/data/products';
-	import { filters } from '$lib/stores/filters.svelte';
+	import { searchQuery, selectedCategory } from '$lib/stores/filters.svelte';
 
 	let loaded = $state(false);
 
 	let filtered = $derived(
 		products.filter((p) => {
-			const q = filters.searchQuery.toLowerCase();
+			const q = $searchQuery.toLowerCase();
 			const matchesSearch = !q || p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
-			const matchesCategory = !filters.selectedCategory || p.category === filters.selectedCategory;
+			const matchesCategory = !$selectedCategory || p.category === $selectedCategory;
 			return matchesSearch && matchesCategory;
 		})
 	);
@@ -27,7 +27,7 @@
 	);
 
 	function setCategory(slug: string | null) {
-		filters.selectedCategory = slug;
+		$selectedCategory = slug;
 		const url = new URL(window.location.href);
 		if (slug) {
 			url.searchParams.set('category', slug);
@@ -38,8 +38,8 @@
 	}
 
 	function clearFilters() {
-		filters.searchQuery = '';
-		filters.selectedCategory = null;
+		$searchQuery = '';
+		$selectedCategory = null;
 		history.replaceState(history.state, '', '/');
 	}
 
@@ -53,13 +53,6 @@
 	$effect(() => {
 		const t = setTimeout(() => loaded = true, 400);
 		return () => clearTimeout(t);
-	});
-
-	$effect(() => {
-		const categoryParam = $page.url.searchParams.get('category') || null;
-		if (categoryParam !== filters.selectedCategory) {
-			filters.selectedCategory = categoryParam;
-		}
 	});
 </script>
 
@@ -86,7 +79,7 @@
 		<button
 			onclick={() => setCategory(null)}
 			class="px-4 py-2 text-sm font-medium rounded-full border transition-all duration-200 cursor-pointer
-				{!filters.selectedCategory
+				{!$selectedCategory
 					? 'bg-ember text-white border-ember shadow-lg shadow-ember/20'
 					: 'bg-card text-body border-hairline hover:border-ember/50 hover:text-ember'}"
 		>
@@ -96,7 +89,7 @@
 			<button
 				onclick={() => setCategory(cat.slug)}
 				class="px-4 py-2 text-sm font-medium rounded-full border transition-all duration-200 cursor-pointer
-					{filters.selectedCategory === cat.slug
+					{$selectedCategory === cat.slug
 						? 'bg-ember text-white border-ember shadow-lg shadow-ember/20'
 						: 'bg-card text-body border-hairline hover:border-ember/50 hover:text-ember'}"
 			>
@@ -118,7 +111,7 @@
 				Limpiar filtros
 			</button>
 		</div>
-	{:else if filters.selectedCategory || filters.searchQuery}
+	{:else if $selectedCategory || $searchQuery}
 		<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 			{#each filtered as product}
 				<ProductCard {product} />
